@@ -1,4 +1,4 @@
-package main
+package pdfletter
 
 import (
 	"fmt"
@@ -10,12 +10,12 @@ import (
 )
 
 type Letter struct {
-	Subject string
-	Date time.Time
-	Period int
-	Student string
-	Class string
-	Pass bool
+	Subject string `json:"subject"`
+	Date time.Time `json:"date"`
+	Period int `json:"period"`
+	Student string `json:"student"`
+	Class string `json:"class"`
+	Pass bool `json:"pass"`
 }
 
 func LetterGen(letter Letter){
