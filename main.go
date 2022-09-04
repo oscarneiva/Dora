@@ -20,7 +20,7 @@ func main() {
 		}
 		letter := pdfletter.Letter{}
 		err = json.Unmarshal(arr, &letter)
-		if err != nil{
+		if err != nil {
 			return
 		}
 		pdfletter.LetterGen(letter)
