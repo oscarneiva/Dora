@@ -11,21 +11,21 @@ import (
 
 type Letter struct {
 	Subject string
-	Date time.Time
-	Period int
+	Date    time.Time
+	Period  string
 	Student string
-	Class string
-	Pass bool
+	Class   string
+	Pass    bool
 }
 
-func LetterGen(letter Letter){
+func LetterGen(letter Letter) {
 	begin := time.Now()
 	m := pdf.NewMaroto(consts.Portrait, consts.A4)
 	//m.SetBorder(true)
 
 	m.Row(20, func() {
 		m.Col(8, func() {
-			m.Text(fmt.Sprintf("%s Department", letter.Student), props.Text{
+			m.Text(fmt.Sprintf("%s Department", letter.Subject), props.Text{
 				Top:   6,
 				Align: consts.Left,
 				Size:  20,
@@ -35,12 +35,12 @@ func LetterGen(letter Letter){
 		m.Col(4, func() {
 			_ = m.FileImage("internal/assets/images/tbs-logo.png", props.Rect{
 				Percent: 90,
-				Left:  28,
+				Left:    28,
 			})
 		})
 	})
 
-	m.Row(20, func(){
+	m.Row(20, func() {
 		m.Col(12, func() {
 			m.Text("Recuperação Paralela Results/Follow up", props.Text{
 				Top:   6,
@@ -51,16 +51,16 @@ func LetterGen(letter Letter){
 		})
 	})
 
-	m.Row(15, func(){
+	m.Row(15, func() {
 		m.Col(4, func() {
-			m.Text(fmt.Sprintf("Date: %s", letter.Date.Format(time.RFC822)), props.Text{
+			m.Text(fmt.Sprintf("Date: %s", letter.Date.Format("January 2, 2006")), props.Text{
 				Top:   3,
 				Align: consts.Left,
 				Size:  15,
 			})
 		})
 		m.Col(4, func() {
-			m.Text(fmt.Sprintf("Marking Period: %d", letter.Period), props.Text{
+			m.Text(fmt.Sprintf("Marking Period: %s", letter.Period), props.Text{
 				Top:   3,
 				Align: consts.Left,
 				Size:  15,
@@ -75,7 +75,7 @@ func LetterGen(letter Letter){
 		})
 	})
 
-	m.Row(15, func(){
+	m.Row(15, func() {
 		m.Col(6, func() {
 			m.Text(fmt.Sprintf("Student: %s", letter.Student), props.Text{
 				Top:   3,
@@ -92,7 +92,7 @@ func LetterGen(letter Letter){
 		})
 	})
 
-	m.Row(15, func(){
+	m.Row(15, func() {
 		m.Col(12, func() {
 			m.Text("Dear parents/guardians,", props.Text{
 				Top:   3,
@@ -102,10 +102,8 @@ func LetterGen(letter Letter){
 		})
 	})
 
-
-
 	if letter.Pass {
-		m.Row(20, func(){
+		m.Row(20, func() {
 			m.Col(12, func() {
 				m.Text(fmt.Sprintf("The purpose of this communication is to inform that %s has met the minimum requirements to pass %s this marking period.", letter.Student, letter.Subject), props.Text{
 					Top:   3,
@@ -115,7 +113,7 @@ func LetterGen(letter Letter){
 			})
 		})
 
-		m.Row(20, func(){
+		m.Row(20, func() {
 			m.Col(12, func() {
 				m.Text(fmt.Sprintf("According to the Recuperação Paralela requirements, %s grade on the report will be changed to a passing grade 5.", letter.Student), props.Text{
 					Top:   3,
@@ -124,8 +122,8 @@ func LetterGen(letter Letter){
 				})
 			})
 		})
-	}else{
-		m.Row(20, func(){
+	} else {
+		m.Row(20, func() {
 			m.Col(12, func() {
 				m.Text(fmt.Sprintf("The purpose of this communication is to inform that %s has not met the minimum requirements to pass %s this marking period.", letter.Student, letter.Subject), props.Text{
 					Top:   3,
@@ -135,7 +133,7 @@ func LetterGen(letter Letter){
 			})
 		})
 
-		m.Row(20, func(){
+		m.Row(20, func() {
 			m.Col(12, func() {
 				m.Text(fmt.Sprintf("According to the Recuperação Paralela requirements, %s grade on the report will remain the same.", letter.Student), props.Text{
 					Top:   3,
@@ -146,10 +144,7 @@ func LetterGen(letter Letter){
 		})
 	}
 
-
-
-
-	m.Row(10, func(){
+	m.Row(10, func() {
 		m.Col(12, func() {
 			m.Text("If you have any questions, please do not hesitate in contacting me.", props.Text{
 				Top:   3,
@@ -159,7 +154,7 @@ func LetterGen(letter Letter){
 		})
 	})
 
-	m.Row(15, func(){
+	m.Row(15, func() {
 		m.Col(12, func() {
 			m.Text("Thank you for your attention and support.", props.Text{
 				Top:   6,
@@ -183,7 +178,7 @@ func LetterGen(letter Letter){
 	})
 	m.Line(1)
 
-	m.Row(15, func(){
+	m.Row(15, func() {
 		m.Col(4, func() {
 			m.Text("Date: ", props.Text{
 				Top:   6,
@@ -192,7 +187,7 @@ func LetterGen(letter Letter){
 			})
 		})
 		m.Col(4, func() {
-			m.Text(fmt.Sprintf("Marking Period: %d", letter.Period), props.Text{
+			m.Text(fmt.Sprintf("Marking Period: %s", letter.Period), props.Text{
 				Top:   6,
 				Align: consts.Left,
 				Size:  15,
@@ -207,7 +202,7 @@ func LetterGen(letter Letter){
 		})
 	})
 
-	m.Row(15, func(){
+	m.Row(15, func() {
 		m.Col(6, func() {
 			m.Text(fmt.Sprintf("Student: %s", letter.Student), props.Text{
 				Top:   3,
@@ -224,7 +219,7 @@ func LetterGen(letter Letter){
 		})
 	})
 
-	m.Row(15, func(){
+	m.Row(15, func() {
 		m.Col(12, func() {
 			m.Text(fmt.Sprintf("I have received the %s Recuperação Paralela Results/Follow up.", letter.Subject), props.Text{
 				Top:   3,
@@ -243,7 +238,7 @@ func LetterGen(letter Letter){
 		})
 	})
 
-	err := m.OutputFileAndClose("certificate.pdf")
+	err := m.OutputFileAndClose(letter.Class + " " + letter.Student + ".pdf")
 	if err != nil {
 		fmt.Println("Could not save PDF:", err)
 		os.Exit(1)
