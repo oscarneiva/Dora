@@ -1,4 +1,4 @@
-package pdfletter
+package main
 
 import (
 	"fmt"
@@ -10,12 +10,12 @@ import (
 )
 
 type Letter struct {
-	Subject string    `json:"subject"`
-	Date    time.Time `json:"date"`
-	Period  int       `json:"period"`
-	Student string    `json:"student"`
-	Class   string    `json:"class"`
-	Pass    bool      `json:"pass"`
+	Subject string
+	Date    time.Time
+	Period  string
+	Student string
+	Class   string
+	Pass    bool
 }
 
 func LetterGen(letter Letter) {
@@ -53,14 +53,14 @@ func LetterGen(letter Letter) {
 
 	m.Row(15, func() {
 		m.Col(4, func() {
-			m.Text(fmt.Sprintf("Date: %s", letter.Date.Format(time.RFC822)), props.Text{
+			m.Text(fmt.Sprintf("Date: %s", letter.Date.Format("January 2, 2006")), props.Text{
 				Top:   3,
 				Align: consts.Left,
 				Size:  15,
 			})
 		})
 		m.Col(4, func() {
-			m.Text(fmt.Sprintf("Marking Period: %d", letter.Period), props.Text{
+			m.Text(fmt.Sprintf("Marking Period: %s", letter.Period), props.Text{
 				Top:   3,
 				Align: consts.Left,
 				Size:  15,
@@ -187,7 +187,7 @@ func LetterGen(letter Letter) {
 			})
 		})
 		m.Col(4, func() {
-			m.Text(fmt.Sprintf("Marking Period: %d", letter.Period), props.Text{
+			m.Text(fmt.Sprintf("Marking Period: %s", letter.Period), props.Text{
 				Top:   6,
 				Align: consts.Left,
 				Size:  15,
@@ -238,7 +238,7 @@ func LetterGen(letter Letter) {
 		})
 	})
 
-	err := m.OutputFileAndClose("certificate.pdf")
+	err := m.OutputFileAndClose("./letters/" + letter.Class + " " + letter.Student + ".pdf")
 	if err != nil {
 		fmt.Println("Could not save PDF:", err)
 		os.Exit(1)

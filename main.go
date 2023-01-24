@@ -1,29 +1,57 @@
 package main
 
 import (
-	"Dora/internal/pdfletter"
-	"encoding/json"
-	"io/ioutil"
-	"net/http"
-
-	"github.com/go-chi/chi/v5"
-	"github.com/go-chi/chi/v5/middleware"
+	"encoding/csv"
+	"fmt"
+	"os"
+	"time"
 )
 
 func main() {
-	r := chi.NewRouter()
-	r.Use(middleware.Logger)
-	r.Post("/lettergen", func(w http.ResponseWriter, r *http.Request) {
-		arr, err := ioutil.ReadAll(r.Body)
+	readFile()
+}
+
+func readFile() {
+	dirReader, err := os.Open("./data/")
+	if err != nil {
+		fmt.Println("Error ", err)
+	}
+	files, err := dirReader.ReadDir(0)
+	if err != nil {
+		fmt.Println("Error ", err)
+	}
+	for i := range files {
+		file, err := os.Open("./data/" + files[i].Name())
 		if err != nil {
-			return
+			fmt.Println("Error ", err)
 		}
-		letter := pdfletter.Letter{}
-		err = json.Unmarshal(arr, &letter)
-		if err != nil {
-			return
+		reader := csv.NewReader(file)
+		data, err := reader.ReadAll()
+		if err == nil {
+			fmt.Println("Error ", err)
 		}
-		pdfletter.LetterGen(letter)
-	})
-	http.ListenAndServe(":3000", r)
+		for _, line := range data[1:] {
+			if line != nil {
+				letter := Letter{
+					Subject: line[0],
+					Date:    time.Now(),
+					Period:  line[1],
+					Student: line[2],
+					Class:   line[3],
+					Pass:    checkPass(line[4]),
+				}
+				LetterGen(letter)
+			} else {
+				break
+			}
+		}
+		file.Close()
+	}
+}
+
+func checkPass(letter string) bool {
+	if letter == "y" || letter == "Y" {
+		return true
+	}
+	return false
 }
