@@ -238,7 +238,7 @@ func LetterGen(letter Letter) {
 		})
 	})
 
-	err := m.OutputFileAndClose(letter.Class + " " + letter.Student + ".pdf")
+	err := m.OutputFileAndClose("./letters/" + letter.Class + " " + letter.Student + ".pdf")
 	if err != nil {
 		fmt.Println("Could not save PDF:", err)
 		os.Exit(1)
