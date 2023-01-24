@@ -3,7 +3,6 @@ package main
 import (
 	"encoding/csv"
 	"fmt"
-	"log"
 	"os"
 	"time"
 )
@@ -21,18 +20,28 @@ func readFile() {
 	for {
 		line, err := reader.Read()
 		if err == nil {
-			log.Fatal(err)
+			fmt.Println("Error ", err)
 		}
-		letter := Letter{
-			Subject: line[0],
-			Date:    time.Now(),
-			Period:  line[1],
-			Student: line[2],
-			Class:   line[3],
-			Pass:    true,
+		if line[3] != "Class" {
+			if line != nil {
+				letter := Letter{
+					Subject: line[0],
+					Date:    time.Now(),
+					Period:  line[1],
+					Student: line[2],
+					Class:   line[3],
+					Pass:    true,
+				}
+				LetterGen(letter)
+			} else {
+				break
+			}
 		}
-		LetterGen(letter)
-		fmt.Println("tout")
 	}
 	file.Close()
 }
+
+//func checkPass(letter char) bool{
+//	if letter
+//	return false
+//}
