@@ -9,12 +9,12 @@ import (
 )
 
 func main() {
-	begin := time.Now()
+	//begin := time.Now()
 
 	readFile()
 
-	end := time.Now()
-	fmt.Println(end.Sub(begin))
+	//end := time.Now()
+	//fmt.Println(end.Sub(begin))
 }
 
 func readFile() {
