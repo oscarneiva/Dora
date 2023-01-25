@@ -19,7 +19,6 @@ type Letter struct {
 }
 
 func LetterGen(letter Letter) {
-	//begin := time.Now()
 	m := pdf.NewMaroto(consts.Portrait, consts.A4)
 
 	m.Row(20, func() {
@@ -237,12 +236,14 @@ func LetterGen(letter Letter) {
 		})
 	})
 
-	err := m.OutputFileAndClose("./letters/" + letter.Class + " " + letter.Student + ".pdf")
+	_, err := os.Stat("./letters/")
+	if os.IsNotExist(err) {
+		os.Mkdir("./letters/", os.ModePerm)
+	}
+
+	err = m.OutputFileAndClose("./letters/" + letter.Class + " " + letter.Student + ".pdf")
 	if err != nil {
 		fmt.Println("Could not save PDF:", err)
 		os.Exit(1)
 	}
-
-	//end := time.Now()
-	//fmt.Println(end.Sub(begin))
 }

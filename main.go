@@ -4,11 +4,17 @@ import (
 	"encoding/csv"
 	"fmt"
 	"os"
+	"strings"
 	"time"
 )
 
 func main() {
+	begin := time.Now()
+
 	readFile()
+
+	end := time.Now()
+	fmt.Println(end.Sub(begin))
 }
 
 func readFile() {
@@ -49,8 +55,8 @@ func readFile() {
 	}
 }
 
-func checkPass(letter string) bool {
-	if letter == "y" || letter == "Y" {
+func checkPass(pass string) bool {
+	if strings.Contains(pass, "y") || strings.Contains(pass, "Y") {
 		return true
 	}
 	return false
