@@ -27,7 +27,7 @@ func readFile() {
 		}
 		reader := csv.NewReader(file)
 		data, err := reader.ReadAll()
-		if err == nil {
+		if err != nil {
 			fmt.Println("Error ", err)
 		}
 		for _, line := range data[1:] {

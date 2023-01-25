@@ -19,9 +19,8 @@ type Letter struct {
 }
 
 func LetterGen(letter Letter) {
-	begin := time.Now()
+	//begin := time.Now()
 	m := pdf.NewMaroto(consts.Portrait, consts.A4)
-	//m.SetBorder(true)
 
 	m.Row(20, func() {
 		m.Col(8, func() {
@@ -244,6 +243,6 @@ func LetterGen(letter Letter) {
 		os.Exit(1)
 	}
 
-	end := time.Now()
-	fmt.Println(end.Sub(begin))
+	//end := time.Now()
+	//fmt.Println(end.Sub(begin))
 }
