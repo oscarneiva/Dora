@@ -9,12 +9,7 @@ import (
 )
 
 func main() {
-	//begin := time.Now()
-
 	readFile()
-
-	//end := time.Now()
-	//fmt.Println(end.Sub(begin))
 }
 
 func readFile() {
@@ -46,7 +41,7 @@ func readFile() {
 					Class:   line[3],
 					Pass:    checkPass(line[4]),
 				}
-				LetterGen(letter)
+				recLetterGen(letter)
 			} else {
 				break
 			}
