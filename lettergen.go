@@ -6,6 +6,7 @@ import (
 	"github.com/johnfercher/maroto/pkg/pdf"
 	"github.com/johnfercher/maroto/pkg/props"
 	"os"
+	"strings"
 	"time"
 )
 
@@ -100,7 +101,7 @@ func recLetterGen(letter Letter) {
 		})
 	})
 
-	if letter.Pass {
+	if letter.Pass && !strings.Contains(letter.Class, "11") {
 		m.Row(20, func() {
 			m.Col(12, func() {
 				m.Text(fmt.Sprintf("The purpose of this communication is to inform that %s has met the minimum requirements to pass %s this marking period.", letter.Student, letter.Subject), props.Text{
@@ -110,10 +111,28 @@ func recLetterGen(letter Letter) {
 				})
 			})
 		})
-
 		m.Row(20, func() {
 			m.Col(12, func() {
 				m.Text(fmt.Sprintf("According to the Recuperação Paralela requirements, %s grade on the report will be changed to a passing grade 5.", letter.Student), props.Text{
+					Top:   3,
+					Align: consts.Left,
+					Size:  15,
+				})
+			})
+		})
+	} else if letter.Pass && strings.Contains(letter.Class, "11") {
+		m.Row(20, func() {
+			m.Col(12, func() {
+				m.Text(fmt.Sprintf("The purpose of this communication is to inform that %s has met the minimum requirements to pass %s this marking period.", letter.Student, letter.Subject), props.Text{
+					Top:   3,
+					Align: consts.Left,
+					Size:  15,
+				})
+			})
+		})
+		m.Row(20, func() {
+			m.Col(12, func() {
+				m.Text(fmt.Sprintf("According to the Recuperação Paralela requirements, %s grade on the report will be changed to a passing grade 4.", letter.Student), props.Text{
 					Top:   3,
 					Align: consts.Left,
 					Size:  15,
@@ -130,7 +149,6 @@ func recLetterGen(letter Letter) {
 				})
 			})
 		})
-
 		m.Row(20, func() {
 			m.Col(12, func() {
 				m.Text(fmt.Sprintf("According to the Recuperação Paralela requirements, %s grade on the report will remain the same.", letter.Student), props.Text{
@@ -141,7 +159,6 @@ func recLetterGen(letter Letter) {
 			})
 		})
 	}
-
 	m.Row(10, func() {
 		m.Col(12, func() {
 			m.Text("If you have any questions, please do not hesitate in contacting me.", props.Text{
