@@ -101,7 +101,7 @@ func recLetterGen(letter Letter) {
 		})
 	})
 
-	if letter.Pass && !strings.Contains(letter.Class, "11") {
+	if letter.Pass && !strings.Contains(letter.Class, "11") && !strings.Contains(letter.Class, "10") {
 		m.Row(20, func() {
 			m.Col(12, func() {
 				m.Text(fmt.Sprintf("The purpose of this communication is to inform that %s has met the minimum requirements to pass %s this marking period.", letter.Student, letter.Subject), props.Text{
@@ -120,7 +120,7 @@ func recLetterGen(letter Letter) {
 				})
 			})
 		})
-	} else if letter.Pass && strings.Contains(letter.Class, "11") {
+	} else if letter.Pass && (strings.Contains(letter.Class, "11") || strings.Contains(letter.Class, "10")) {
 		m.Row(20, func() {
 			m.Col(12, func() {
 				m.Text(fmt.Sprintf("The purpose of this communication is to inform that %s has met the minimum requirements to pass %s this marking period.", letter.Student, letter.Subject), props.Text{

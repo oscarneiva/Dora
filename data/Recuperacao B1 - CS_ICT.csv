@@ -1,6 +1,9 @@
 Subject,Period,Student,Class,Pass (y or n)
-CS/ICT,1,Ada Lovelace,6A,y
-CS/ICT,1,Alan Turing,11A,y
-CS/ICT,1,Linus Torvalds,6A,y
-CS/ICT,1,Tim Berners Lee,6B,n
-CS/ICT,1,Dennis Ritchie,11B,n
+CS/ICT,4,Gustavo Almeida,5D,y
+CS/ICT,4,Joana Kropf,5D,y
+CS/ICT,4,Maria Saucha,6D,n
+CS/ICT,4,Sofia Nogueira,6A,y
+CS/ICT,4,Sophia Radwan,7A,n
+CS/ICT,4,Daniel Reis,7A,n
+CS/ICT,4,Justin Bender,7B,n
+CS/ICT,4,Sarah Dias,10,y
