@@ -1,7 +1,7 @@
 # Dora
 
 ## About
-Dora is a Go program to write letters to parents giving notices about the students' recuperação performance. Dora uses Maroto PDF to ease dealing with document processing and formatting.
+A Go program to write letters to parents giving notice about the students' academic performance. The project was created to ease writing letters for the school faculty. The name was inspired by Fernanda Montenegro's character in the movie Central do Brasil. Dora uses Maroto PDF to simplify dealing with document processing and formatting.
 
 ## Installation and how to use
 - Download the project as a zip file and extract it.
